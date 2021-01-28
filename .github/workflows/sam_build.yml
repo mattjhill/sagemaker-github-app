@@ -32,8 +32,7 @@ jobs:
       - name: SAM build
         run: |
           sam build --use-container 
-          sam deploy --stack-name $STACK_NAME --image-repository $IMAGE_REPO
+          sam deploy --config-file $SAM_CONFIG 
         env:
           SAM_CLI_TELEMETRY: 0
-          STACK_NAME: github-sagemaker
-          IMAGE_REPO: 712135249233.dkr.ecr.us-east-1.amazonaws.com/github-sagemaker
+          SAM_CONFIG: samconfig.toml
