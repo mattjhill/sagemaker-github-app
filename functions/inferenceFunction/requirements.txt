@@ -1,0 +1,5 @@
+pandas
+requests
+https://download.pytorch.org/whl/cpu/torch-1.7.1%2Bcpu-cp38-cp38-linux_x86_64.whl
+transformers
+alpaca_trade_api

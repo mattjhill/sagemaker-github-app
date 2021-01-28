@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  python3.8
+
+  Sample SAM Template for lambda-model
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+
+Globals:
+  Function:
+    Timeout: 45
+    MemorySize: 256 
+
+Resources:
+  InferenceFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./functions/inferenceFunction
+      DockerTag: python3.8-v1
