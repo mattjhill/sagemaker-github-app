@@ -28,11 +28,13 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      # Runs the Super-Linter action
       - name: SAM build
-        run: |
-          sam build --use-container 
-          sam deploy --config-file $SAM_CONFIG 
+        run: sam build --use-container 
+        env:
+          SAM_CLI_TELEMETRY: 0
+
+      - name: SAM deploy
+        run: ls -la
         env:
           SAM_CLI_TELEMETRY: 0
           SAM_CONFIG: samconfig.toml
