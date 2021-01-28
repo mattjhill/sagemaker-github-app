@@ -6,6 +6,5 @@ stack_name = "github-sagemaker"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-ltcpfpa19vww"
 s3_prefix = "github-sagemaker"
 region = "us-east-1"
-profile = "knovita"
 capabilities = "CAPABILITY_IAM"
 image_repositories = ["InferenceFunction=712135249233.dkr.ecr.us-east-1.amazonaws.com/github-sagemaker"]
