@@ -17,11 +17,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
       # Runs the Super-Linter action
       - name: SAM build
         run: |
-          sam build --use-container $STACK_NAME
-          sam deploy
+          sam build --use-container 
+          sam deploy --stack-name $STACK_NAME --image-repository $IMAGE_REPO
         env:
           SAM_CLI_TELEMETRY: 0
           STACK_NAME: github-sagemaker
+          IMAGE_REPO: 712135249233.dkr.ecr.us-east-1.amazonaws.com/github-sagemaker
