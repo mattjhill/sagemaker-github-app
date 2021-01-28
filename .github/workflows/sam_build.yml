@@ -19,6 +19,9 @@ jobs:
 
       # Runs the Super-Linter action
       - name: SAM build
-        run: sam build --use-container
+        run: |
+          sam build --use-container $STACK_NAME
+          sam deploy
         env:
           SAM_CLI_TELEMETRY: 0
+          STACK_NAME: github-sagemaker
