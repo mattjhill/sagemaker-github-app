@@ -29,15 +29,12 @@ Parameters:
   AlpacaBaseUrl:
     Type: String
     Default: 'https://paper-api.alpaca.markets'
-  InferenceApiStage:
-    Type: String
-    Default: 'dev'
 
 Resources:
   InferenceApi:
     Type: AWS::Serverless::Api
     Properties:
-      StageName: !Ref InferenceApiStage
+      StageName: 'dev'
 
   InferenceFunction:
     Type: AWS::Serverless::Function
