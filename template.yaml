@@ -35,6 +35,7 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: 'dev'
+      OpenApiVersion: 3.0.1
 
   InferenceFunction:
     Type: AWS::Serverless::Function
