@@ -29,8 +29,16 @@ Parameters:
   AlpacaBaseUrl:
     Type: String
     Default: 'https://paper-api.alpaca.markets'
+  InferenceApiStage:
+    Type: String
+    Default: 'dev'
 
 Resources:
+  InferenceApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref InferenceApiStage
+
   InferenceFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -39,9 +47,15 @@ Resources:
         HelloWorld:
           Type: Api
           Properties:
+            RestApiId: !Ref InferenceApi
             Path: /{ticker}/{date}
             Method: get
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./functions/inferenceFunction
       DockerTag: python3.8-v1
+
+Outputs:
+  InferenceApiEndpoint:
+    Description: InferenceApi HTTP endpoint
+    Value: !Sub "https://{InferenceApi.RootResourceId}.execute-api.{AWS::Region}.amazonaws.com/{InferenceApiStage}"
