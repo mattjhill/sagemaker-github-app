@@ -1,10 +1,14 @@
 version = 0.1
 [default]
+[default.package]
+[default.package.parameters]
+image_repositories = ["InferenceFunction=712135249233.dkr.ecr.us-east-1.amazonaws.com/github-sagemaker"]
 [default.deploy]
 [default.deploy.parameters]
 stack_name = "github-sagemaker"
-s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-ltcpfpa19vww"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1v1suno5a8phi"
 s3_prefix = "github-sagemaker"
 region = "us-east-1"
 capabilities = "CAPABILITY_IAM"
 image_repositories = ["InferenceFunction=712135249233.dkr.ecr.us-east-1.amazonaws.com/github-sagemaker"]
+parameter_overrides = "AlpacaBaseUrl=\"https://paper-api.alpaca.markets\""

@@ -11,6 +11,24 @@ Globals:
   Function:
     Timeout: 45
     MemorySize: 256 
+    Environment:
+      Variables:
+        APCA_API_KEY_ID: !Ref AlpacaApiKeyId
+        APCA_API_SECRET_KEY: !Ref AlpacaApiSecretKey
+        APCA_API_BASE_URL: !Ref  AlpacaBaseUrl
+
+Parameters:
+  AlpacaApiKeyId:
+    Type: String
+    NoEcho: true
+    Default: 'PKURSNA8VBJCVS1D3VQC'
+  AlpacaApiSecretKey:
+    Type: String
+    NoEcho: true
+    Default: 'OloIpUnz4pWBeimvX1ueEyYZmni99WQAHzzeWq5m'
+  AlpacaBaseUrl:
+    Type: String
+    Default: 'https://paper-api.alpaca.markets'
 
 Resources:
   InferenceFunction:
@@ -21,7 +39,7 @@ Resources:
         HelloWorld:
           Type: Api
           Properties:
-            Path: /
+            Path: /{ticker}/{date}
             Method: get
     Metadata:
       Dockerfile: Dockerfile

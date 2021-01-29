@@ -28,13 +28,20 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      - name: Retrieve model data
+        run: aws s3 sync $MODEL_DATA functions/inferenceFunction/model_data
+        env:
+          MODEL_DATA: s3://knovita-sagemaker/stock_model_high_low/latest/
+
       - name: SAM build
         run: sam build --use-container 
         env:
           SAM_CLI_TELEMETRY: 0
 
       - name: SAM deploy
-        run: ls -la
+        run: sam deploy --config-file $SAM_CONFIG --parameter-overrides AlpacaApiKeyId=$APCA_API_KEY_ID AlpacaApiSecretKey=$APCA_API_SECRET_KEY
         env:
           SAM_CLI_TELEMETRY: 0
           SAM_CONFIG: samconfig.toml
+          APCA_API_KEY_ID: ${{ secrets.APCA_API_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.APCA_API_SECRET_KEY }}
