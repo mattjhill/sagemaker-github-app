@@ -55,4 +55,4 @@ Resources:
 Outputs:
   InferenceApiEndpoint:
     Description: InferenceApi HTTP endpoint
-    Value: !Sub "https://${InferenceApi}.execute-api.${AWS::Region}.amazonaws.com/${InferenceApiStage}/"
+    Value: !Sub "https://${InferenceApi}.execute-api.${AWS::Region}.amazonaws.com/"
